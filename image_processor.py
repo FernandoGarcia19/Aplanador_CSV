@@ -7,13 +7,7 @@ def image_processor(image_input) -> str:
     """"Receives image, processes it to extract the table data, and returns a CSV string."""
     load_dotenv()
 
-    if isinstance(image_input, (bytes, bytearray)):
-        image_bytes = bytes(image_input)
-    elif isinstance(image_input, str):
-        with open(image_input, "rb") as f:
-            image_bytes = f.read()
-    else:
-        raise TypeError("image_input must be bytes, bytearray, or a file path string")
+    image_bytes = bytes(image_input)
 
     image_b64 = base64.b64encode(image_bytes).decode('utf-8')
     

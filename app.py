@@ -54,11 +54,16 @@ st.set_page_config(
 st.title("Herramienta de Aplanamiento de Tablas en Imágenes a CSV")
 st.write("Convierte imágenes de tablas en muestras CSV aplanadas")
 
+model_provider = st.radio("Seleccionar proveedor", options=["GPT", "Gemini"])
+
 table_image = st.file_uploader("Cargar imagen de tabla", type=["jpg", "jpeg", "png"])
 
 if table_image is not None: 
+    
     st.image(table_image, caption="Tabla cargada")
+    
     output = image_processor(table_image.getvalue())
+    
     st.subheader("Tabla Aplanada")
 
     cleaned_csv = normalize_csv_text(output)
