@@ -1,8 +1,8 @@
 import streamlit as st 
-from image_processor import image_processor
 import csv
 from io import StringIO
-
+from model_provider import ModelProviderFactory
+from dotenv import load_dotenv
 
 def normalize_csv_text(raw_output: str) -> str:
     """Remove markdown fences and keep only CSV lines."""
@@ -55,14 +55,14 @@ st.title("Herramienta de Aplanamiento de Tablas en Imágenes a CSV")
 st.write("Convierte imágenes de tablas en muestras CSV aplanadas")
 
 model_provider = st.radio("Seleccionar proveedor", options=["GPT", "Gemini"])
-
 table_image = st.file_uploader("Cargar imagen de tabla", type=["jpg", "jpeg", "png"])
 
 if table_image is not None: 
     
     st.image(table_image, caption="Tabla cargada")
     
-    output = image_processor(table_image.getvalue())
+    provider = ModelProviderFactory.create(model_provider)
+    output = provider.generate_csv_sample(table_image.getvalue(), provider.extract_json_schema(table_image.getvalue()))
     
     st.subheader("Tabla Aplanada")
 
