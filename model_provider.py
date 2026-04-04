@@ -89,6 +89,8 @@ Generate a CSV code block.
 Header format: nv1,nv2,nv3,...,nvN,fecha,valor
 Ensure the hierarchy follows the visual "indentation" or "bolding" cues from the image and the structure identified in the JSON. ONLY return the CSV sample.
 Return up to only 30 rows of sample data.
+Make sure to maintain the numeric value in "valor". Do not truncate it. 
+In the extremely rare case that the image contains no numeric attribute for "Valor", populate the "valor" column with a placeholder value of 1.
 """
 
 
