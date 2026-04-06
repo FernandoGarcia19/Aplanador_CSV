@@ -46,6 +46,10 @@ Rules:
 • Parent rows represent higher nv levels.
 • Child rows represent deeper nv levels.
 
+Constraint: A categorical level (nvX) must represent a variable. 
+If a name or entity applies to every single numeric value in the table (e.g., the name of the company at the top of a report), 
+it is Metadata, not a Dimension. Do not include constant Metadata as an nv level.
+
 STEP 3 — Identify Column Dimension
 Column headers often represent entities measured across the same categories, such as:
 institutions
